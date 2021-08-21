@@ -1,0 +1,14 @@
+
+
+.footer {
+    font-size:15px;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+top:90%;
+background-color: #e9ecef;
+   color: black;
+   text-align: center;
+   font-family: Arial, Helvetica, sans-serif;
+   padding:10px 12px;
+}
