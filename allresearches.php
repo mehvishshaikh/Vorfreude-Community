@@ -7,7 +7,7 @@
     <title>Vorfreude Community</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/png" href="img/research.png"/>
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <!-- Place favicon.ico in the root directory -->
 
@@ -69,17 +69,16 @@
                             <nav>
                                     <ul id="navigation">
                                         <li><a href="index.php">Home</a></li>
-                                        <li><a href="allresearches.php">Researches</a></li>
                                         <li><a href="./../../login4.php">Chat</a></li>
                                         <li><a href="./../../contact.php">Contact Us</a></li>
                                         <li><a href="./../../login1.php">Login</a></li>
                                         <li><a href="./../../testing.html">Sign Up</a></li>
-                                       <!--<li>
-                                        <form action="./../../ideasearch.php" method="POST">
+                                       <li>
+                                        <form action="ideasearch.php" method="POST">
                                             <input type="text" autocomplete="off" placeholder="Search.." name="search" style="border-radius:10px;">
                                             <button type="submit" style="border-radius:10px;"><i class="fa fa-search"></i></button>
                                         </form>
-                                        </li>-->
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -106,9 +105,9 @@
                     <div class="col-lg-10 col-md-10">
                         <div class="slider_text">
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
-                                Match Found For Your Search!!
+                                No Research Is Ever Quite Complete!
                             </h3>
-                            <!--<h1 style="color:white;">Research is an organized method for keeping you reasonably dissatisfied with what you have.</h1>-->
+                            <h1 style="color:white;">Research is an organized method for keeping you reasonably dissatisfied with what you have.</h1>
 
                             <br><br>
                          <a class="boxed-btn3 wow fadeInLeft"  data-wow-duration="1s" data-wow-delay=".2s" href="#service_area"><i class="fa fa-angle-double-down" style="font-size:36px"></i></a>
@@ -125,30 +124,25 @@
         <div class="container">
             <center><h1 style="font-size:40px;">Our Researches</h1></center>
             <?php
-include 'connection.php';
-if (isset($_POST['search'])){
-    $searchq=$_POST['search'];
-    $searchq=preg_replace("#[^0-9a-z]#i","",$searchq);
-    $query="select * from research where description like '%$searchq%' or title like '%$searchq%' or category like '%$searchq%' ";
-
-    $result = mysqli_query($conn, $query);
-    echo "<div class='row'>";
-    while($row = mysqli_fetch_array($result)){
-        echo "<div class='col-md-4'>";
-        echo "<div class='card'  style='margin-top:7%;'>";
-        echo "<div class='card-body'>";
-            echo "<a href='blog.php?ID={$row['id']}'><img src=' ".$row['img_path']." ' style='height:200px; width:320px;'></a><br><br>";
-            echo "<p><span><a style='text-decoration:none;' href='blog.php?ID={$row['id']}'><h4>".$row['title']."</a></span></p>";
-            echo "<h4>".$row['category']." ".$row['other_category']."</h4>";
-            echo "<h4>Researcher: ".$row['creator']."</h4>";
-            echo "<p>".$row['date']."</p>";
-        echo"</div>";
-        echo"</div>";
-        echo"</div><br><br><br>";
-    }
-    echo"</div><br><br><br>";    
-}
-?>
+            include 'connection.php';
+            $sql = "select id,title,description,creator,category,other_category,img_path,path,date from research order by id desc";
+            $result = mysqli_query($conn, $sql);
+        echo "<div class='row'>";
+        while($row = mysqli_fetch_array($result)){
+            echo "<div class='col-md-4'>";
+            echo "<div class='card'  style='margin-top:7%;'>";
+            echo "<div class='card-body'>";
+                echo "<a href='blog.php?ID={$row['id']}'><img src=' ".$row['img_path']." ' style='height:200px; width:320px;'></a><br><br>";
+                echo "<h2><span><a style='text-decoration:none;' href='blog.php?ID={$row['id']}'><h4>".$row['title']."</a></span></h2>";
+                echo "<h4>".$row['category']." ".$row['other_category']."</h4>";
+                echo "<h4>Researcher: ".$row['creator']."</h4>";
+                echo "<p>".$row['date']."</p>";
+            echo"</div>";
+            echo"</div>";
+            echo"</div><br><br><br>";
+        }
+        echo"</div><br><br><br>";    
+        ?> 
         </div>
     </div>
     <!--/ service_area  -->
@@ -583,6 +577,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
 
+    <script src="js/main.js"></script>
     <script src="js/main.js"></script>
     <script>
 $(document).ready(function(){
